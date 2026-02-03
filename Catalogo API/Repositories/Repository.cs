@@ -1,4 +1,5 @@
 ﻿using Catalogo_API.Context;
+using Catalogo_API.Repositories.Interfaces;
 using System.Linq.Expressions;
 
 namespace Catalogo_API.Repositories;

@@ -2,6 +2,7 @@ using Catalogo_API.Context;
 using Catalogo_API.Filters;
 using Catalogo_API.Logging;
 using Catalogo_API.Repositories;
+using Catalogo_API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 

@@ -1,6 +1,6 @@
 ﻿using Catalogo_API.Context;
 using Catalogo_API.Models;
-using Catalogo_API.Repositories;
+using Catalogo_API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

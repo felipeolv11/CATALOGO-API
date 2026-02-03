@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Catalogo_API.Repositories;
+namespace Catalogo_API.Repositories.Interfaces;
 
 public interface IRepository<T>
 {
