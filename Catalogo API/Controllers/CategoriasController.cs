@@ -11,24 +11,24 @@ namespace Catalogo_API.Controllers;
 [ApiController]
 public class CategoriasController : ControllerBase
 {
-    private readonly ICategoriaRepository _categoriaRepository;
+    private readonly IUnitOfWork _uow;
 
-    public CategoriasController(ICategoriaRepository categoriaRepository)
+    public CategoriasController(IUnitOfWork uow)
     {
-        _categoriaRepository = categoriaRepository;
+        _uow = uow;
     }
 
     [HttpGet]
     public ActionResult<IEnumerable<Categoria>> Get()
     {
-        var categorias = _categoriaRepository.GetAll();
+        var categorias = _uow.CategoriaRepository.GetAll();
         return Ok(categorias);
     }
 
     [HttpGet("{id:int}", Name = "ObterCategoria")]
     public ActionResult<Categoria> Get(int id)
     {
-        var categoria = _categoriaRepository.Get(c => c.CategoriaId == id);
+        var categoria = _uow.CategoriaRepository.Get(c => c.CategoriaId == id);
 
         if (categoria is null)
         {
@@ -46,7 +46,8 @@ public class CategoriasController : ControllerBase
             return BadRequest();
         }
 
-        var categoriaCriada = _categoriaRepository.Create(categoria);
+        var categoriaCriada = _uow.CategoriaRepository.Create(categoria);
+        _uow.Commit();
 
         return new CreatedAtRouteResult("ObterCategoria",
             new { id = categoriaCriada.CategoriaId }, categoriaCriada);
@@ -60,7 +61,8 @@ public class CategoriasController : ControllerBase
             return BadRequest();
         }
 
-        _categoriaRepository.Update(categoria);
+        _uow.CategoriaRepository.Update(categoria);
+        _uow.Commit();
 
         return Ok(categoria);
     }
@@ -68,14 +70,15 @@ public class CategoriasController : ControllerBase
     [HttpDelete("{id:int}")]
     public ActionResult<Categoria> Delete(int id)
     {
-        var categoria = _categoriaRepository.Get(c => c.CategoriaId == id);
+        var categoria = _uow.CategoriaRepository.Get(c => c.CategoriaId == id);
 
         if (categoria is null)
         {
             return NotFound();
         }
 
-        var categoriaExcluida = _categoriaRepository.Delete(categoria);
+        var categoriaExcluida = _uow.CategoriaRepository.Delete(categoria);
+        _uow.Commit();
 
         return Ok(categoriaExcluida);
     }
