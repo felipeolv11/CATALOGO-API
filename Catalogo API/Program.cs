@@ -1,4 +1,5 @@
 using Catalogo_API.Context;
+using Catalogo_API.DTOs.Mappings;
 using Catalogo_API.Filters;
 using Catalogo_API.Logging;
 using Catalogo_API.Repositories;
@@ -39,6 +40,8 @@ builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderCon
 {
     LogLevel = LogLevel.Information
 }));
+
+builder.Services.AddAutoMapper(typeof(CatalogoDTOMappingProfile));
 
 var app = builder.Build();
 
