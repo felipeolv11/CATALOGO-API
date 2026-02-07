@@ -18,7 +18,7 @@ builder.Services.AddControllers(options =>
 })
 .AddJsonOptions(options =>
     options.JsonSerializerOptions
-        .ReferenceHandler = ReferenceHandler.IgnoreCycles);
+        .ReferenceHandler = ReferenceHandler.IgnoreCycles).AddNewtonsoftJson();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
